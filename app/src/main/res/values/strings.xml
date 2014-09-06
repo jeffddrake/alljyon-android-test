@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">FirstBuild Connected Appliance</string>
     <string name="voice_return_header">You just said the following</string>
     <string name="voice_notification_label">Press For Voice Return</string>
     <string name="EXTRA_VOICE_REPLY">extra_voice_reply</string>
     <string name="notification_header_text_id">com.example.jeffdrake.wearable_notification_test_100</string>
+    <string name="title_activity_handle_voice_response">HandleVoiceResponseActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

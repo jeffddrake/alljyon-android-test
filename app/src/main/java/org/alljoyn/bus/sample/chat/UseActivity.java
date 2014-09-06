@@ -48,6 +48,9 @@ import android.util.Log;
 import android.widget.TextView.OnEditorActionListener;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
@@ -140,7 +143,7 @@ public class UseActivity extends Activity implements Observer {
 
                 //JDD - create a new intent
                 //Intent replyIntent = new Intent(this, DialogBuilder.class);
-                Intent replyIntent = new Intent(getApplicationContext(), DialogBuilder.class);
+                Intent replyIntent = new Intent(getApplicationContext(), HandleVoiceResponseActivity.class);
 
 
                 int notificationId = 001;
@@ -168,11 +171,6 @@ public class UseActivity extends Activity implements Observer {
                 notificationManager.notify(notificationId, notification);
             }
         });
-
-
-
-
-
 
 
         mLeaveButton = (Button)findViewById(R.id.useLeave);
@@ -257,6 +255,7 @@ public class UseActivity extends Activity implements Observer {
         }
 
         if (qualifier.equals(ChatApplication.HISTORY_CHANGED_EVENT)) {
+
             Message message = mHandler.obtainMessage(HANDLE_HISTORY_CHANGED_EVENT);
             mHandler.sendMessage(message);
         }
@@ -277,6 +276,56 @@ public class UseActivity extends Activity implements Observer {
         mHistoryList.clear();
         List<String> messages = mChatApplication.getHistory();
         for (String message : messages) {
+            //JDD - putting the notifications here because it is ugly
+
+            //JDD - debug
+            String testMatchString = "end of cycle";
+            Pattern pattern = Pattern.compile(testMatchString);
+            Matcher match = pattern.matcher(message);
+            int count = 0;
+            Log.i("TEST", "About to Start checking");
+            while(match.find())
+            {
+                count++;
+                Log.i("TEST", "Match Number" + new Integer(count).toString());
+
+                String replyLabel = getString(R.string.voice_notification_label);
+                RemoteInput remoteInput = new RemoteInput.Builder(getResources().getString(R.string.EXTRA_VOICE_REPLY))
+                        .setLabel(replyLabel)
+                        .build();
+
+                //JDD - create a new intent
+                //Intent replyIntent = new Intent(this, DialogBuilder.class);
+                Intent replyIntent = new Intent(getApplicationContext(), HandleVoiceResponseActivity.class);
+
+
+                int notificationId = 001;
+
+                PendingIntent viewPendingIntent =
+                        PendingIntent.getActivity(getApplicationContext(), 0, replyIntent, 0);
+
+                // Create the reply action and add the remote input
+                NotificationCompat.Action action =
+                        new NotificationCompat.Action.Builder(R.drawable.ic_launcher_1b, getString(R.string.voice_notification_label), viewPendingIntent).addRemoteInput(remoteInput).build();
+
+
+                Notification notification =
+                        new NotificationCompat.Builder(getApplicationContext())
+                                .setSmallIcon(R.drawable.ic_launcher_1b)
+                                .setContentTitle("Your Dryer Is Summoning You")
+                                .setContentText("Your Laundry Is Done, Stop Drinking Beer and Get It, Slob.")
+                                .extend(new NotificationCompat.WearableExtender().addAction(action))
+                                .build();
+
+                // Get an instance of the NotificationManager service
+                NotificationManagerCompat notificationManager =
+                        NotificationManagerCompat.from(getApplicationContext());
+                // Build the notification and issues it with notification manager.
+                notificationManager.notify(notificationId, notification);
+                break;
+            }
+
+
             mHistoryList.add(message);
         }
         mHistoryList.notifyDataSetChanged();

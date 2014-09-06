@@ -491,6 +491,7 @@ public class ChatApplication extends Application implements Observable {
      */
     public synchronized void newRemoteUserMessage(String nickname, String message) {
         addInboundItem(nickname, message);
+        Log.i("INBOUND", "Here is the data we received" + message);
     }
 
     final int OUTBOUND_MAX = 5;

@@ -21,6 +21,9 @@ import org.alljoyn.bus.sample.chat.Observable;
 import org.alljoyn.bus.sample.chat.Observer;
 import org.alljoyn.bus.sample.chat.DialogBuilder;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -28,6 +31,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
 
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.RemoteInput;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -126,6 +132,40 @@ public class UseActivity extends Activity implements Observer {
                 //JDD - it's to start the oven
                 String packet = "hello, test notification";
                 mChatApplication.newLocalUserMessage(packet);
+
+                String replyLabel = getString(R.string.voice_notification_label);
+                RemoteInput remoteInput = new RemoteInput.Builder(getResources().getString(R.string.EXTRA_VOICE_REPLY))
+                        .setLabel(replyLabel)
+                        .build();
+
+                //JDD - create a new intent
+                //Intent replyIntent = new Intent(this, DialogBuilder.class);
+                Intent replyIntent = new Intent(getApplicationContext(), DialogBuilder.class);
+
+
+                int notificationId = 001;
+
+                PendingIntent viewPendingIntent =
+                        PendingIntent.getActivity(getApplicationContext(), 0, replyIntent, 0);
+
+                // Create the reply action and add the remote input
+                NotificationCompat.Action action =
+                        new NotificationCompat.Action.Builder(R.drawable.ic_launcher_1b, getString(R.string.voice_notification_label), viewPendingIntent).addRemoteInput(remoteInput).build();
+
+
+                Notification notification =
+                        new NotificationCompat.Builder(getApplicationContext())
+                                .setSmallIcon(R.drawable.ic_launcher_1b)
+                                .setContentTitle("Your Dryer Is Summoning You")
+                                .setContentText("Your Laundry Is Done, Stop Drinking Beer and Get It.")
+                                .extend(new NotificationCompat.WearableExtender().addAction(action))
+                                .build();
+
+                // Get an instance of the NotificationManager service
+                NotificationManagerCompat notificationManager =
+                        NotificationManagerCompat.from(getApplicationContext());
+                // Build the notification and issues it with notification manager.
+                notificationManager.notify(notificationId, notification);
             }
         });
 

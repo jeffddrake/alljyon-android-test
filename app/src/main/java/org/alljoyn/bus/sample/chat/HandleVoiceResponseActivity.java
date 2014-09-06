@@ -42,8 +42,7 @@ public class HandleVoiceResponseActivity extends Activity {
             {
                 count++;
                 Log.i("TEST", "Match Number" + new Integer(count).toString());
-                mChatApplication.newLocalUserMessage(testMatchString);
-                mChatApplication.newLocalUserMessage("start");
+                mChatApplication.newLocalUserMessage("air fluff;light on;start");
                 break;
             }
         }

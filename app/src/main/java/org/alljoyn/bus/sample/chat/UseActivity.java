@@ -62,22 +62,23 @@ public class UseActivity extends Activity implements Observer {
         mChatApplication.useSetChannelName("test");
         mChatApplication.useJoinChannel();
 
-        EditText messageBox = (EditText)findViewById(R.id.useMessage);
-        messageBox.setImeActionLabel("Send", KeyEvent.KEYCODE_ENTER);
-
-        messageBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            public boolean onEditorAction(TextView View, int actionId, KeyEvent event) {
-
-                String message = View.getText().toString();
-                Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
-                mChatApplication.newLocalUserMessage(message);
-                View.setText("");
-
-                return true;
-            }
-
-         });
+//JDD - removed for now as we do not need to type in text
+//        EditText messageBox = (EditText)findViewById(R.id.useMessage);
+//        messageBox.setImeActionLabel("Send", KeyEvent.KEYCODE_ENTER);
+//
+//        messageBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//
+//            public boolean onEditorAction(TextView View, int actionId, KeyEvent event) {
+//
+//                String message = View.getText().toString();
+//                Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
+//                mChatApplication.newLocalUserMessage(message);
+//                View.setText("");
+//
+//                return true;
+//            }
+//
+//         });
 
         mJoinButton = (Button)findViewById(R.id.useJoin);
         mJoinButton.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +114,24 @@ public class UseActivity extends Activity implements Observer {
             public void onClick(View v) {
                 //JDD - repurposed this is not the join button any more
                 //JDD - it's to start the oven
-                String packet = "eatme";
+                String packet = "hello, toggle light";
                 mChatApplication.newLocalUserMessage(packet);
             }
         });
+
+        mTestNotification = (Button)findViewById(R.id.useTestNotificationSend);
+        mTestNotification.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //JDD - repurposed this is not the join button any more
+                //JDD - it's to start the oven
+                String packet = "hello, test notification";
+                mChatApplication.newLocalUserMessage(packet);
+            }
+        });
+
+
+
+
 
 
 
@@ -307,6 +322,7 @@ public class UseActivity extends Activity implements Observer {
     private Button mLeaveButton;
     private Button mStartOven;
     private Button mToggleLight;
+    private Button mTestNotification;
 
     //private TextView mChannelName;
 

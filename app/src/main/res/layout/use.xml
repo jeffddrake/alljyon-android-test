@@ -4,33 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content">
-
-        <TableRow android:gravity="center">
-
-   	        <!--<TextView-->
-    	        <!--android:text="Channel Name:  "-->
-            <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/useChannelName"-->
-    	        <!--android:text="1234567890"-->
-            <!--/>-->
-        </TableRow>
-
-        <TableRow android:gravity="center">
-            <!--<TextView-->
-    	         <!--android:text="Channel Status:  "-->
-            <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/useChannelStatus"-->
-    	        <!--android:text="1234567890"-->
-            <!--/>-->
-        </TableRow>
-    </TableLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -74,16 +47,31 @@
         android:text="Toggle Light"
         />
     </LinearLayout>
-    
-    <EditText
-        android:id="@+id/useMessage"
-        android:inputType="text"
-        android:imeOptions="actionSend"
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-		android:hint="Enter message here"
-    />
+        android:layout_marginTop="5dp">
+=
+        <Button
+            android:id="@+id/useTestNotificationSend"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Send A Test Notification"
+            />
+    </LinearLayout>
+    
+    <!--<EditText-->
+        <!--android:id="@+id/useMessage"-->
+        <!--android:inputType="text"-->
+        <!--android:imeOptions="actionSend"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+		<!--android:hint="Enter message here"-->
+    <!--/>-->
        
     <ListView 
         android:id="@+id/useHistoryList"           

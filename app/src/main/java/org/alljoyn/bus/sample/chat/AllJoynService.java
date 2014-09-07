@@ -622,7 +622,9 @@ public class AllJoynService extends Service implements Observer {
      * the well-known name a hosting bus attachment will request and
      * advertise.
      */
+    //JDD - testing for the light bulb simulator
     private static final String NAME_PREFIX = "org.alljoyn.bus.samples.chat";
+    //private static final String NAME_PREFIX = "org.alljoyn.BusNode";
 
     /**
      * The well-known session port used as the contact port for the chat service.
@@ -1267,5 +1269,7 @@ public class AllJoynService extends Service implements Observer {
     static {
         Log.i(TAG, "System.loadLibrary(\"alljoyn_java\")");
         System.loadLibrary("alljoyn_java");
+//        System.loadLibrary("liballjoyn_lsf_java");
+//        System.loadLibrary("libgnustl_shared");
     }
 }

@@ -53,9 +53,12 @@ import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 import org.json.JSONStringer;
+//import org.allseen.lsf.helper.facade.LightingDirector;
+//import android.os.Looper;
 
 public class UseActivity extends Activity implements Observer {
     private static final String TAG = "chat.UseActivity";
+    //private LightingDirector lightingDirector;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate()");
@@ -88,6 +91,16 @@ public class UseActivity extends Activity implements Observer {
 //            }
 //
 //         });
+
+
+        // Instantiate the director and wait for the connection
+//        lightingDirector = new LightingDirector(new Handler(Looper.getMainLooper()));
+//        lightingDirector.postOnNextControllerConnection(new Runnable() {
+//            @Override
+//            public void run() {
+//                //performLightingOperations();
+//            }}, 5000);
+        //lightingDirector.start(getSupportFragmentManager());
 
         mJoinButton = (Button)findViewById(R.id.useJoin);
         mJoinButton.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +173,7 @@ public class UseActivity extends Activity implements Observer {
                         new NotificationCompat.Builder(getApplicationContext())
                                 .setSmallIcon(R.drawable.ic_launcher_1b)
                                 .setContentTitle("Your Dryer Is Summoning You")
-                                .setContentText("Your Laundry Is Done, Stop Drinking Beer and Get It.")
+                                .setContentText("Your Laundry Is Done, Go Get It.")
                                 .extend(new NotificationCompat.WearableExtender().addAction(action))
                                 .build();
 
@@ -313,7 +326,7 @@ public class UseActivity extends Activity implements Observer {
                         new NotificationCompat.Builder(getApplicationContext())
                                 .setSmallIcon(R.drawable.ic_launcher_1b)
                                 .setContentTitle("Your Dryer Is Summoning You")
-                                .setContentText("Your Laundry Is Done, Stop Drinking Beer and Get It, Slob.")
+                                .setContentText("Your Laundry Is Done, Go Get It Before It Wrinkles.")
                                 .extend(new NotificationCompat.WearableExtender().addAction(action))
                                 .build();
 

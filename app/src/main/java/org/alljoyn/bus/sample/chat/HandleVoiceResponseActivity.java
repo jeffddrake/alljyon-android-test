@@ -33,7 +33,7 @@ public class HandleVoiceResponseActivity extends Activity {
         {
             DynamicDisplay.setText(DisplayText);
 
-            String testMatchString = "air fluff";
+            String testMatchString = "fresh";
             Pattern pattern = Pattern.compile(testMatchString);
             Matcher match = pattern.matcher(DisplayText);
             int count = 0;
@@ -80,7 +80,8 @@ public class HandleVoiceResponseActivity extends Activity {
         {
             DynamicDisplay.setText(DisplayText);
 
-            String testMatchString = "air fluff";
+            String testMatchString = "it fresh";
+            //String voiceCommand = "it fresh";
             Pattern pattern = Pattern.compile(testMatchString);
             Matcher match = pattern.matcher(DisplayText);
             int count = 0;
@@ -89,7 +90,7 @@ public class HandleVoiceResponseActivity extends Activity {
             {
                 count++;
                 Log.i("TEST", "Match Number" + new Integer(count).toString());
-                mChatApplication.newLocalUserMessage(testMatchString);
+                mChatApplication.newLocalUserMessage("air fluff");
                 break;
             }
         }
